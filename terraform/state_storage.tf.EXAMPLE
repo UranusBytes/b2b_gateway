@@ -1,0 +1,11 @@
+# Most likely, you shouldn't be storing your terraform state locally, but in some centralized location like Terraform Enterprise or S3.  But this is on a per-usage basis
+# See here for more info: https://www.terraform.io/docs/backends/types/index.html
+#
+# Example for using S3
+terraform {
+  backend "s3" {
+    bucket = var.TERRAFORM_STATE["BUCKET"]
+    key    = var.TERRAFORM_STATE["KEY"]
+    region = var.TERRAFORM_STATE["REGION"]
+  }
+}

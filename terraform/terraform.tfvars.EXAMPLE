@@ -1,0 +1,10 @@
+AWS_REGION = "us-west-2"
+AWS_PROFILE = "default"
+# Note: This is dependent upon your usage of the state_storage.tf
+TERRAFORM_STATE = {
+  BUCKET = "mybucket"
+  KEY = "terraform/b2b_gateway"
+  REGION = "us-west-2"
+}
+# Note: A dash and 8 random chars will be appended to this bucket name, so 'myBucket' will become 'myBucket-1234ABCD'
+FILE_STORAGE_S3_BUCKET = "my-b2b-gateway-file-bucket"

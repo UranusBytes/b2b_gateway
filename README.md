@@ -31,7 +31,9 @@ The following egress workflows are supported:
 ## Resources
 The following AWS resources are deployed and used by this solution:
 * S3 bucket
-
+* SFTP Transfer for SFTP
+* SQS Queue
+  * For notification of new inbound files waiting
 
 ## Assumptions
 The following assumptions have been made for this solution:
@@ -39,9 +41,23 @@ The following assumptions have been made for this solution:
 
 ## Configuration
 
-Configuration of the solution is drive by variables defined in the `terraform.tvvars` file.
-* 
+### AWS Configuration
+Authentication to AWS is based upon the usage of AWS profiles.  This abstracts out using keys, MFA, roles, ec2 instance profiles, etc...  For more info on configuring different AWS profiles, see here: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html  
 
+### Terraform Configuration
+Configuration of the solution is drive by the following:
+* Adjust variables defined in the `terraform.tvvars` file.  See `terraform.tfvars.EXAMPLE` for more
+    * AWS_REGION
+      * Desc: The AWS region that all the AWS resources will be deployed
+      * Valid Values:
+        * An AWS region
+      * Default Value: us-west-2
+    * AWS_PROFILE
+      * Desc: The AWS profile that is used for access to manage the AWS resources
+      * Valid Values:
+        * An validly configured AWS profile
+      * Default Value: default
+* Define appropriate location to store Terraform state in file `/terraform/state_storage.tf`
 
 ## Deployment to AWS
 
@@ -68,3 +84,8 @@ Stuff to improve or still to do:
   * API Key
 * Add an outbound webhook for notification of new files ready to be picked up
 * Allow for multiple creds to be used for each tenant (cred rolling)
+* Add more validation for input variables 
+* Add logging (either access or object level) to S3 bucket
+* Versioning and lifecycle policy for S3 file storage bucket
+* Support multiple environments (Prod, Dev, etc...)
+* S3 default encryption

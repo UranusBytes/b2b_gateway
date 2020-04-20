@@ -130,3 +130,8 @@ dmypy.json
 
 # PyCharm
 /.idea/**
+
+# Terraform variables
+/terraform/.terraform/**
+/terraform/terraform.tfvars
+/terraform/state_storage.tf
